@@ -10,5 +10,5 @@
 
 # Rules
 
-* Due date: Sunday 23:59
+* Deadline: Sunday 23:59
 * Directory name: /hw0/your_name
