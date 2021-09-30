@@ -21,7 +21,29 @@ void init()
 void add(char *name, char *number)
 {
   struct record *p = new_node();
-  if(p!=NULL){
+  
+  if(p==NULL){
+    printf("Can't add.  The address book is full!\n");
+    return;
+  }
+  if(data == NULL){
+      data = p;
+      data->next = NULL;
+   }
+   else{
+     p->next = data;
+     data = p;
+   }
+   data->name[0]=name[0];
+   data->name[1]=name[1];
+   data->name[2]=name[2];
+   data->number[0]=number[0];
+   data->number[1]=number[1];
+   data->number[2]=number[2];
+   data->number[3]=number[3];
+  }
+ 
+  /*if(p!=NULL){
     if(data == NULL){
       data = p;
       data->next = NULL;
@@ -40,7 +62,7 @@ void add(char *name, char *number)
   }
   else{
     printf("Can't add.  The address book is full!\n");
-  }
+  }*/
 }
 
 
