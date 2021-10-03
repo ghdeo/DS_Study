@@ -16,21 +16,11 @@ void init()
   init_pool();
 }
 
-void add(char *name, char *number)
+static void link_node(char *name, struct record *new)
 {
-  struct record *new;
   struct record *cur;
   struct record *prv;
   int           result;
-
-  new = new_node();
-  if (new == NULL)
-  {
-    printf("Can't add.  The address book is full!\n");
-    return ;
-  }
-  strncpy(new->name, name, 3);
-  strncpy(new->number, number, 4);
 
   if (data == NULL)
   {
@@ -53,6 +43,21 @@ void add(char *name, char *number)
   }
   new->next = cur;
   prv->next = new;
+}
+
+void add(char *name, char *number)
+{
+  struct record *new;
+
+  new = new_node();
+  if (new == NULL)
+  {
+    printf("Can't add.  The address book is full!\n");
+    return ;
+  }
+  strncpy(new->name, name, 3);
+  strncpy(new->number, number, 4);
+  link_node(name, new);
 }
 
 void search(char name[3])
