@@ -4,7 +4,7 @@
 #define POOL_SIZE 10
 
 // pool of memory
-struct record pool[POOL_SIZE];  
+struct record pool[POOL_SIZE];
 struct record * top=pool;  // pool is constant; a pointer to the stack top.
 
 void init_pool() // Initialize the pool
@@ -13,9 +13,9 @@ void init_pool() // Initialize the pool
   struct record *r=pool;
   struct record *s;
 
-  pool[POOL_SIZE-1].next=NULL;  
+  pool[POOL_SIZE-1].next=NULL;
 
-  for(i=1;i<POOL_SIZE;i++) { 
+  for(i=1;i<POOL_SIZE;i++) {
     s=r++;
     s->next=r;
   }
