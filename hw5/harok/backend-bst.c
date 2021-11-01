@@ -95,7 +95,7 @@ void add(char *name, char *number)
 {
   struct record *r;
   struct record *p;
-  struct record *q;
+  struct record *q = NULL;
 
   r = new_node();
 
@@ -222,15 +222,12 @@ void delete(char name[3])
     }
     strncpy(r->name, s->name, 3);
     strncpy(r->number, s->number, 4);
-    if (s->right == NULL)
-      r->right = NULL;
+
+    if (s->right)
+      t->left = s->right;
     else
-    {
-      if (s->right)
-        t->left = s->right;
-      else
-        t->left = NULL;
-    }   
+      t->left = NULL;
+    
     free_node(s);
   }
   printf("The name was deleted.\n");
