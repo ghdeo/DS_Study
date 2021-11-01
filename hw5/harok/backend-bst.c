@@ -95,7 +95,7 @@ void add(char *name, char *number)
 {
   struct record *r;
   struct record *p;
-  struct record *q;
+  struct record *q; // 구조체 초기화 해야 함. vs에서 오류 
 
   r = new_node();
 
@@ -178,7 +178,7 @@ void delete(char name[3])
     return;
   }
 
-  if (r->left == NULL & r->right == NULL) // no child
+  if (r->left == NULL & r->right == NULL) // no child // & 두개 써줘야 함.
   {
     if (p->left == r)
       p->left = NULL;
