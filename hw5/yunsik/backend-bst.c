@@ -164,7 +164,7 @@ void delete(char name[3])
             prev = temp;
             local_prev = temp;
             temp = temp->left;
-            local_temp = temp->left; 
+            local_temp = temp; 
         }
 
         else if ((result = compare(name, temp)) > 0)
@@ -172,7 +172,7 @@ void delete(char name[3])
             prev = temp;
             local_prev = temp;
             temp = temp->right;
-            local_temp = temp->left; // 아마 right?
+            local_temp = temp; // 아마 right?
         }
 
         else
