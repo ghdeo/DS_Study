@@ -148,7 +148,7 @@ void add(char *name, char *number)
 
 
 // The most complicated.
-void delete(char name[3])
+void delete(char name[3])  
 {
     int result;
 
@@ -164,7 +164,7 @@ void delete(char name[3])
             prev = temp;
             local_prev = temp;
             temp = temp->left;
-            local_temp = temp->left;
+            local_temp = temp->left; 
         }
 
         else if ((result = compare(name, temp)) > 0)
@@ -172,7 +172,7 @@ void delete(char name[3])
             prev = temp;
             local_prev = temp;
             temp = temp->right;
-            local_temp = temp->left;
+            local_temp = temp->left; // 아마 right?
         }
 
         else
@@ -189,7 +189,7 @@ void delete(char name[3])
                     prev->right = NULL;
 
                 free_node(temp);
-                printf("The name was deleted.\n");
+                printf("The name was deleted.\n"); //같은 printf를 반복하지 않아도 구현가능함
                 return;
             }
 
@@ -198,7 +198,7 @@ void delete(char name[3])
                 if (prev == temp)
                     data = temp->right;
 
-                if (prev->right == temp)
+                if (prev->right == temp) // else if와 else를 사용했어도 좋을거같음
                     prev->right = temp->right;
 
                 if (prev->left == temp)
@@ -221,13 +221,13 @@ void delete(char name[3])
                     prev->left = temp->left;
 
                 free_node(temp);
-                printf("The name was deleted.\n");
+                printf("The name was deleted.\n"); 
                 return;
             }
 
-            if (temp->left != NULL && temp->right != NULL)
+            if (temp->left != NULL && temp->right != NULL) // 자식 2개인 노드 delete 할때 seg fault 발생
             {  
-                local_temp = local_temp->right;
+                local_temp = local_temp->right; // local_temp가 NULL인 경우에 처리가 이상해짐 아마 predecessor로 구현?
               
                 if (local_temp->left == NULL)
                 {
@@ -277,7 +277,7 @@ void delete(char name[3])
     }
 
     if (temp == NULL)
-        printf("Couldn't find the name.\n");
+        printf("Couldn't find the name.\n"); // abc add후 aaa 삭제하고자 하면 seg fault (다른 유사한 상황에도 마찬가지)
 
     // Messages to print
   //  printf("The name was deleted.\n");  
