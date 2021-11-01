@@ -223,10 +223,15 @@ void delete(char name[3])
     strncpy(r->name, s->name, 3);
     strncpy(r->number, s->number, 4);
 
-    if (s->right)
-      t->left = s->right;
+    if (s == r->right)
+      r->right = s->right;
     else
-      t->left = NULL;
+    {
+      if (s->right)
+        t->left = s->right;
+      else
+        t->left = NULL;
+    }
     
     free_node(s);
   }
