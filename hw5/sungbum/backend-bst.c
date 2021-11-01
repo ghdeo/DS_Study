@@ -172,7 +172,7 @@ void delete(char name[3]) // 함수 길이 너무 길다. // 일반적으로 25�
     tmp=del->right;
     successor=tmp;
     while(tmp!=NULL){
-      bf_successor=successor;
+      bf_successor=successor; // prev prv trail
       successor=tmp;
       tmp=tmp->left;
     }
@@ -190,7 +190,7 @@ void delete(char name[3]) // 함수 길이 너무 길다. // 일반적으로 25�
   else{ // has a child
     struct record* tmp;
     if(is_left)
-      tmp=bf_del->left; // del == data인 경우 bf_del의 초기화?
+      tmp=bf_del->left; // del == data인 경우 bf_del의 초기화? // <- seg fault 발생
       // has no child인 경우와 마찬가지로 해당 경우 고려해주어야 하지 않을까요?
     else
       tmp=bf_del->right;
