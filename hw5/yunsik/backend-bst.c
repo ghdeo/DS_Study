@@ -228,7 +228,16 @@ void delete(char name[3])
             if (temp->left != NULL && temp->right != NULL)
             {  
                 local_temp = local_temp->right;
-
+              
+                if (local_temp->left == NULL)
+                {
+                    data = local_temp;
+                    local_temp->left = temp->left;
+                    free_node(temp);
+                    printf("The name was deleted.\n");
+                    return;
+                }
+              
                 while (local_temp->left != NULL)
                 {
                     local_prev = local_temp;
