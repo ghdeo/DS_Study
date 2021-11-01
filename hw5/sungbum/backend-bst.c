@@ -91,13 +91,13 @@ void search(char name[3])
 }
 
 
-void add(char *name, char *number)
+void add(char *name, char *number) // 거의 같음
 {
   struct record *r,*new,*tmp;
   int result;
   r=data;
 
-  new=new_node();
+  new=new_node(); // 이 부분이 while문 하단에 작성되어 있는데 NULL 고려하면 위치 적절
   if(new==NULL){
     printf("Can't add.  The pool is empty!\n");
     return;
@@ -126,11 +126,11 @@ void add(char *name, char *number)
 
 
 // The most complicated.
-void delete(char name[3])
+void delete(char name[3]) // 함수 길이 너무 길다. // 일반적으로 25줄 이상 -> 별개의 함수 사용
 {
   struct record *del, *bf_del;
   int result;
-  int is_left = 0;
+  int is_left = 0; // ON/OFF flag 자료형은 bool로 사용하는것이 좋다.
   del=data;
 
   while(del!=NULL){
@@ -154,9 +154,9 @@ void delete(char name[3])
     return;
   }
 
-  if(del->left==NULL&&del->right==NULL){
+  if(del->left==NULL&&del->right==NULL){ // has no child
     if(del==data){
-      data=NULL;
+      data=NULL; // 이거 저는 빠트렸네요
       free_node(del);
     }
     else{
@@ -164,10 +164,10 @@ void delete(char name[3])
         bf_del->left=NULL;
       else
         bf_del->right=NULL;
-      free_node(del);
+      free_node(del); // 중복코드
     }
   }//
-  else if(del->left!=NULL&&del->right!=NULL){
+  else if(del->left!=NULL&&del->right!=NULL){ // has two children
     struct record* successor, *bf_successor, *tmp;
     tmp=del->right;
     successor=tmp;
@@ -187,10 +187,11 @@ void delete(char name[3])
     }
     free_node(successor);
   }//
-  else{
+  else{ // has a child
     struct record* tmp;
     if(is_left)
-      tmp=bf_del->left;
+      tmp=bf_del->left; // del == data인 경우 bf_del의 초기화?
+      // has no child인 경우와 마찬가지로 해당 경우 고려해주어야 하지 않을까요?
     else
       tmp=bf_del->right;
 
@@ -232,7 +233,7 @@ void print_number(struct record *r)
 {
   print_data(r->number, 4);
 }
-void print_inorder(struct record *t)
+void print_inorder(struct record *t) // 똑같음
 {
   if(t==NULL) return;
   print_inorder(t->left);
@@ -249,7 +250,7 @@ void print_list()
 }
 
 // returns the height of the BST.
-int height(struct record *t)
+int height(struct record *t) // 똑같음
 {
   int l, r;
 

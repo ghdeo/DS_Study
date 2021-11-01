@@ -64,8 +64,8 @@ void add(char *name, char *number) // 함수 코드 too long
 
   while (compare(name,p) > 0) // 탐색
   {
-  pre = p; // indenting
-  p = p->next;
+    pre = p; // indenting
+    p = p->next;
   }
   pre->next = new;
   new->next = p;
