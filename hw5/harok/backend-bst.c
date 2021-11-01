@@ -189,7 +189,7 @@ void delete(char name[3])
     free_node(r);
   }
 
-  else if (r->left != NULL && r->right == NULL) // only left child
+  else if (r->left != NULL && r->right == NULL) // only left child // -> add abc 1234, add aaa 1111, d abc -> 에러가 남.
   {
     if (p->left == r)
       p->left = r->left;
@@ -198,7 +198,7 @@ void delete(char name[3])
     free_node(r);
   }
 
-  else if (r->left == NULL && r->right != NULL) // only right child
+  else if (r->left == NULL && r->right != NULL) // only right child // -> 마찬가지로 오른쪽에 자식 하나만 있을 때 루트 노드를 지우면 에러 발생.
   {
     if (p->left == r)
       p->left = r->right;
@@ -207,7 +207,7 @@ void delete(char name[3])
     free_node(r);
   }
 
-  else if (r->left != NULL && r->right != NULL) // 2 children
+  else if (r->left != NULL && r->right != NULL) // 2 children // 코드 내용은 설명을 좀 들어봐야 알 것 같음. 노트에 적어놓은 순서대로 진행하면 에러 발생.
   {
     t = r->right;
     s = r->right;
