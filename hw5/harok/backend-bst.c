@@ -95,7 +95,7 @@ void add(char *name, char *number)
 {
   struct record *r;
   struct record *p;
-  struct record *q; // 구조체 초기화 해야 함. vs에서 오류 
+  struct record *q;
 
   r = new_node();
 
@@ -178,7 +178,7 @@ void delete(char name[3])
     return;
   }
 
-  if (r->left == NULL & r->right == NULL) // no child // & 두개 써줘야 함.
+  if (r->left == NULL && r->right == NULL) // no child
   {
     if (p->left == r)
       p->left = NULL;
@@ -189,25 +189,29 @@ void delete(char name[3])
     free_node(r);
   }
 
-  else if (r->left != NULL && r->right == NULL) // only left child // -> add abc 1234, add aaa 1111, d abc -> 에러가 남.
+  else if (r->left != NULL && r->right == NULL) // only left child
   {
     if (p->left == r)
       p->left = r->left;
-    else
+    else if (p->right == r)
       p->right = r->left;
+    else
+      data = r->left;
     free_node(r);
   }
 
-  else if (r->left == NULL && r->right != NULL) // only right child // -> 마찬가지로 오른쪽에 자식 하나만 있을 때 루트 노드를 지우면 에러 발생.
+  else if (r->left == NULL && r->right != NULL) // only right child
   {
     if (p->left == r)
       p->left = r->right;
-    else
+    else if (p->right == r)
       p->right = r->right;
+    else
+      data = r->right;
     free_node(r);
   }
 
-  else if (r->left != NULL && r->right != NULL) // 2 children // 코드 내용은 설명을 좀 들어봐야 알 것 같음. 노트에 적어놓은 순서대로 진행하면 에러 발생.
+  else if (r->left != NULL && r->right != NULL) // 2 children
   {
     t = r->right;
     s = r->right;
