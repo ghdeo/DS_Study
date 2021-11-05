@@ -1,3 +1,6 @@
+// add()함수는 이진 탐색 트리의 높이값을 반환합니다.
+// height()함수는 이진 탐색 트리를 REPEAT만큼 반복시켜, 높이의 평균과 분산, 표준편차를 구합니다.
+
 #define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
