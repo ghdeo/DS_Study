@@ -11,7 +11,7 @@
 #include "backend-bst.h"
 
 #define POOL_SIZE 50
-#define REPEAT 1000000
+#define REPEAT 10000
 
 int max_height = 0;
 
@@ -22,15 +22,11 @@ struct record {
     struct record* right;
 };
 
-//int basic_height(struct record* t);
 void height();
 
 // pool of memory
 static struct record pool[POOL_SIZE]; // static because pool is strictly private
 struct record* top = pool;  // a pointer variable for pool stack top.
-
-// comparison function for records
-//int compare(int number, struct record*);
 
 // data
 struct record* data = NULL; // Initially NULL.
@@ -121,8 +117,6 @@ void add_sub()
 
     if (data == NULL)
     {
-        //printf("if data == NULL");
-        //printf("\n");
         data = newNode;
         temp_height++;
         return;
@@ -134,10 +128,6 @@ void add_sub()
 
     if (max_height < temp_height)
         max_height = temp_height;
-
-    // Messages to print
-    //  printf("Can't add.  The pool is empty!\n");
-    //  printf("The name was successfully added!\n");
 }
 
 int add()
@@ -147,26 +137,8 @@ int add()
     for (i = 0; i < POOL_SIZE; i++)
         add_sub();
 
-    //printf("The name was successfully added!\n");
-    //printf("%d", basic_height(data));
-    //printf("\n");
-
     return max_height;
-    //return basic_height(data);
 }
-
-// returns the height of the BST.
-//int basic_height(struct record* t)
-//{
-//    if (t == NULL)
-//        return -1;
-//    if (basic_height(t->left) < basic_height(t->right))
-//        return basic_height(t->right) + 1;
-//    else
-//        return basic_height(t->left) + 1;
-//    // dummy return.  Should return a valid height.
-//    //return 0;
-//}
 
 void height() //average height
 {
