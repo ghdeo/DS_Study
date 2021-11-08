@@ -10,8 +10,8 @@
 #include <math.h>
 #include "backend-bst.h"
 
-#define POOL_SIZE 50
-#define REPEAT 10000
+#define POOL_SIZE 50 // 변수 처리 하거나 표준입력을 통해 진행?
+#define REPEAT 10000 // iteration이 일반적 표현?
 
 int max_height = 0;
 
@@ -46,8 +46,8 @@ void init_pool() // Initialize the pool; Use right instead of next!!!
     }
 }
 
-// Get a node from the pool. Returns NULL if pool is empty. 
-// When calling new_node(), make sure to check if it is NULL. 
+// Get a node from the pool. Returns NULL if pool is empty.
+// When calling new_node(), make sure to check if it is NULL.
 struct record* new_node()
 {
     struct record* r;
@@ -92,7 +92,7 @@ void add_sub()
         return;
     }
 
-    number = rand();
+    number = rand(); // srand와 인접?
 
     while (temp != NULL)
     {
@@ -127,7 +127,7 @@ void add_sub()
         prev->right = newNode;
 
     if (max_height < temp_height)
-        max_height = temp_height;
+        max_height = temp_height; // <- height 측정 마지막에 하는것이 좋지 않을까
 }
 
 int add()
@@ -137,25 +137,25 @@ int add()
     for (i = 0; i < POOL_SIZE; i++)
         add_sub();
 
-    return max_height;
+    return max_height; // max를 리턴?
 }
 
 void height() //average height
 {
     int arr[POOL_SIZE];
     int i;
-    int sum = 0;
+    int sum = 0; // 자료형 더 큰것? unsigned long long
     double variance_sum = 0;
-    double average, variance, standard_Deviation;
-    
+    double average, variance, standard_Deviation; // 표기법?
+
     for (i = 0; i < POOL_SIZE; i++)
     {
         arr[i] = 0;
-    }
+    } // 일정한 스타일?
 
     for (i = 0; i < REPEAT; i++)
     {
-        int result = add(); // add는 height를 반환, height에 맞는 배열의 인덱스에 들어가서 숫자가 하나씩 증가
+        int result = add(); // add는 height를 반환, height에 맞는 배열의 인덱스에 들어가서 숫자가 하나씩 증가 // 선언과 할당 분리 일정한 스타일?
         arr[result]++;
         free_all();
         init_pool();
@@ -172,11 +172,11 @@ void height() //average height
 
     for (i = 0; i < POOL_SIZE; i++)
         sum += i * arr[i];  // i는 height고, arr[i]는 height = i인 것이 나온 횟수
-    
+
     average = (double)sum / REPEAT;
 
     for (i = 0; i < POOL_SIZE; i++)
-        variance_sum += ((double)i - average) * ((double)i - average) * (double)arr[i];
+        variance_sum += ((double)i - average) * ((double)i - average) * (double)arr[i]; // var 계속해서 더해가면 따로변수 하나 더 선언하지 않아도 될것 같다?
 
     variance = variance_sum / REPEAT;
 
