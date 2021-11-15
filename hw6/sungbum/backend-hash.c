@@ -103,10 +103,10 @@ void add(char *name, char *number)
 
   int hashVal=hash(name);
   struct record *hp=hash_table[hashVal];
-  if(hp!=NULL){
+  if(hp!=NULL){                                 // 포인터를 쓰고 안쓰고의 차이. 결국 코드는 비슷한 듯
     new->next=hp;
   }
-  hash_table[hashVal]=new;
+  hash_table[hashVal]=new;                      // 중복이 안되어 더 깔끔함
   printf("The name was successfully added!\n");
   return;
 }
@@ -117,8 +117,8 @@ void search(char name[3])
   struct record *find=hash_table[hash(name)];
 
   while(find!=NULL){
-    ++cnt;
-    if(compare(name,find)==0)
+    ++cnt;                                    // ++count를 써서 더 깔끔함
+    if(compare(name,find)==0)                 // break문으로 간결함
       break;
     find=find->next;
   }
@@ -141,7 +141,7 @@ void delete(char name[3])
   int cnt=0;
   int hashVal=hash(name);
   struct record *del=hash_table[hashVal];
-  struct record *preDel=hash_table[hashVal];
+  struct record *preDel=hash_table[hashVal];      // 교수님이 더블포인터를 기본 코드로 주셨는데, 더블포인터로 구현해보는건 어떨지... 굳이 더블포인터를 쓴 이유가 있다면 혹시 아시나요?
 
   while(del!=NULL){
     ++cnt;
@@ -203,7 +203,7 @@ void print_dist()
     else{
       struct record *tour=hash_table[i];
       while(tour!=NULL){
-        ++cnt;
+        ++cnt;                    // cnt++해도 상관 없을지
         tour=tour->next;
       }
       printf("%d:%d ",i,cnt);
