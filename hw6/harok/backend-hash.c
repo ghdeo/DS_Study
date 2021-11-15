@@ -5,7 +5,7 @@ Will take a hash prime p, not too big, probably 17, for an easy test.
 
 Give a function name_to_num().
 
-Define the hash function hash(name)= name_to_num(name) mod p. 
+Define the hash function hash(name)= name_to_num(name) mod p.
 
 
 The list of first three hundred primes:
@@ -60,7 +60,7 @@ int hash(char name[3])
 {
   return name_to_num(name)%HASH_PRIME;
 }
-/* "abc" and "bbb" have the same hash value.  So do abt and bbs. */ 
+/* "abc" and "bbb" have the same hash value.  So do abt and bbs. */
 
 
 // record structure
@@ -79,15 +79,15 @@ int compare(char key[3], struct record *);
 void print_name(struct record *);
 void print_number(struct record *);
 void print_data(char *, int);
-  
-// Hash table: an array of hash values.  
+
+// Hash table: an array of hash values.
 struct record * hash_table[HASH_PRIME];
 
 // Initially, each pointer of the hash table is valued NULL.
 void init_hash_table()
 {
   int i;
-  
+
   for(i=0;i<HASH_PRIME;i++)
     hash_table[i]=NULL;
 }
@@ -96,15 +96,15 @@ void init_hash_table()
 
 
 // Still use the same memory management.
-void init_pool() // Initialize the pool. 
+void init_pool() // Initialize the pool.
 {
   int i;
   struct record *r=pool;
   struct record *s;
 
-  pool[POOL_SIZE-1].next=NULL;  
+  pool[POOL_SIZE-1].next=NULL;
 
-  for(i=1;i<POOL_SIZE;i++) { 
+  for(i=1;i<POOL_SIZE;i++) {
     s=r++;
     s->next=r;
   }
@@ -119,23 +119,23 @@ void init()
 
 
 // Get a node from the pool. Returns NULL if pool is empty. (A BETTER DESIGN)
-// When calling new(), make sure to check if it is NULL. 
-struct record * new_node()  
+// When calling new(), make sure to check if it is NULL.
+struct record * new_node()
 {
   struct record *r;
-  
+
   if(top==NULL)
     return NULL;
 
   r=top;
-  top=r->next;  
+  top=r->next;
   return r;
 }
 
 // Push a node to the pool.
 void free_node(struct record *r)
 {
-  r->next=top;  
+  r->next=top;
   top=r;
 }
 
@@ -144,7 +144,7 @@ IMPORTANT NOTE on add()
  1. Allow duplicate names.
  2. Put in front of the linked list.
 **************************/
-void add(char *name, char *number)
+void add(char *name, char *number) // 동일
 {
   int hh=hash(name);
   struct record *r=hash_table[hh];
@@ -169,7 +169,7 @@ void add(char *name, char *number)
 
   if (r != NULL)
     p->next = r;
-  
+
   hash_table[hh] = p;
 
   printf("The name was successfully added!\n");
@@ -180,7 +180,7 @@ IMPORTANT NOTE on search()
 Because we allow duplicate names, search() finds the most recently-added name.
 Prints the number of comparisons.
 **************************/
-void search(char name[3])  
+void search(char name[3])
 {
   struct record *r=hash_table[hash(name)];
   int res;
@@ -189,7 +189,7 @@ void search(char name[3])
   while (r!=NULL)
   {
     res = compare(name,r);
-    if(res==0) {
+    if(res==0) { // 예외를 상단에 배치
       cnt += 1;
       print_name(r);
       printf(" : ");
@@ -200,11 +200,11 @@ void search(char name[3])
     else
     {
       r=r->next;
-      cnt += 1; 
+      cnt += 1;
     }
   }
   if (r==NULL)
-    printf("Couldn't find the name.\n");   
+    printf("Couldn't find the name.\n");
   printf("%d key comparisons were made.\n", cnt);
 }
 
@@ -229,8 +229,8 @@ void delete(char name[3])
     res = compare(name,r);
     if(res==0) {
       cnt += 1;
-      q ->next = r->next;
-      free_node(r);
+      q ->next = r->next; // 첫번째 노드에서 바로 찾는 경우 seg fault?
+      free_node(r); // 해시테이블 수정은?
       printf("The name was successfully deleted!\n");
       break;
     }
@@ -238,11 +238,11 @@ void delete(char name[3])
     {
       q = r;
       r=r->next;
-      cnt += 1; 
+      cnt += 1;
     }
   }
   if (r==NULL)
-    printf("Couldn't find the name.\n");   
+    printf("Couldn't find the name.\n");
   printf("%d key comparisons were made.\n", cnt);
 }
 
@@ -277,7 +277,7 @@ void print_data(char * s, int n)
     putchar(s[i]);
 }
 
-void print_dist()
+void print_dist() // 동일
 {
   struct record *r;
   int i = 0;
@@ -291,7 +291,7 @@ void print_dist()
     {
       r=r->next;
       cnt += 1;
-    }  
+    }
     printf("%d:%d ",i,cnt);
   }
   printf("\n");
