@@ -43,7 +43,7 @@ int get_hash(char key[5], int hash_prime)
 	return (x % hash_prime);
 }
 
-size_t  get_sum(int hash_prime, char *mark, int flag_question_nbr)
+size_t  get_sum(int hash_prime, int *mark, int flag_question_nbr)
 {
   int     i;
   size_t  sum;
@@ -66,11 +66,11 @@ size_t  get_sum(int hash_prime, char *mark, int flag_question_nbr)
 
 size_t  process_m(int hash_prime, char words[5757][5], int flag_question_nbr)
 {
-  char    *mark;
+  int    *mark;
   int     i;
   size_t  sum;
 
-  mark = malloc(sizeof(char) * hash_prime);
+  mark = malloc(sizeof(int) * hash_prime);
   if (mark == NULL)
     exit (1);
   i = 0;
@@ -93,8 +93,7 @@ size_t  process_m(int hash_prime, char words[5757][5], int flag_question_nbr)
 
 int main(void)
 {
-  char  words[5757][5];
-  int   i;
+  char  words[5757][5];;
 
   read_file(words);
   printf("For all following experiments, the number of words(keys): 5757\n");
