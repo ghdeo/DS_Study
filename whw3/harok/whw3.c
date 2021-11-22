@@ -56,8 +56,8 @@ int main()
   FILE *f;
   f=fopen("words.dat","r");
                                                   // 파일이 열리지 않았을 경우 exit(-1)코드
-  for (i=0; i<5757; i++)                          // 여기서 5757로 하면 문제 발생, dat 맨 앞이 *로 시작하는 것은 알아서 제외가 안됨. printf(    fgets(word,sizeof(word), f)); 찍어보기
-  {
+  for (i=0; i<5757; i++)                          // 여기서 5757로 하면 문제 발생, dat 맨 앞이 *로 시작하는 것은 알아서 제외가 안됨. printf(fgets(word,sizeof(word), f)); 찍어보기
+  {                                               // 결국에는 5757개의 문자열이 hash값에 맞게 들어가서 더해지기 때문에 결과는 동일할 수 있겠지만, 과정 상 논리적으로는 다를 수 있다고 
     fgets(word,sizeof(word), f);
     hash_record[hash(word)] += 1;
   }
