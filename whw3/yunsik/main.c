@@ -21,7 +21,7 @@ void count_comparison(char hash_table[], int number);
 
 int main()
 {
-	char hash_table1[M1] = { 0, };
+	char hash_table1[M1] = { 0, }; // init 쓰지 않은 이유?
 	char hash_table2[M2] = { 0, };
 	char hash_table3[M3] = { 0, };
 	char hash_table4[M4] = { 0, };
@@ -79,15 +79,15 @@ void make_hash_table(char hash_table[], int number)
 	if (fp == NULL)
 	{
 		fprintf(stderr, "Can't open %s file.\n", filename);
-		exit(EXIT_FAILURE);
+		exit(EXIT_FAILURE); //EXIT_FAILURE 사용 이유?
 	}
 
 	for (i = 0; i < LINE; i++)
 	{
 		fgets(words, 100, fp);
 
-		if (words[0] == '*')
-			continue;
+		if (words[0] == '*') //words[0] == '*' 인 경우가 ?
+			continue; 
 
 		for (j = 0; j < 5; j++)
 			five_words[j] = words[j];
